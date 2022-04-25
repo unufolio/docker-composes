@@ -1,0 +1,26 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    # restart: always
+    # command: rabbitmq-plugins enable rabbitmq_management 
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "15671:15671"
+      - "15672:15672"
+      - "25672:25672"
+      - "5672:5672"
+    volumes:
+      - ./lib/:/var/lib/rabbitmq/
+      - ./etc/:/etc/rabbitmq/"
+      - ./log/:/var/log/rabbitmq/log/
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
