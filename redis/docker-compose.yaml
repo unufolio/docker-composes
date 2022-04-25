@@ -1,0 +1,16 @@
+version: '3'
+services:
+  redis:
+    image: redis:6.2
+    container_name: redis
+    restart: always
+    privileged: true
+    volumes:
+      - ./data:/data
+      - ./conf:/usr/local/redis
+      - ./logs:/logs
+    command: ["redis-server","/usr/local/redis/redis.conf"]
+    ports:
+      - 6379:6379
+    environment:
+      - TZ="Asia/Shanghai"
