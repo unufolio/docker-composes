@@ -1,0 +1,15 @@
+services:
+  mariadb:
+    restart: always
+    image: mariadb:10.7
+    container_name: mariadb
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./conf.d:/etc/mysql/conf.d
+      - ./my.cnf:/etc/mysql/my.cnf
+      - ./log:/var/log
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 3307:3306

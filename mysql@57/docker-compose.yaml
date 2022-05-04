@@ -1,0 +1,14 @@
+services:
+  mysql:
+    restart: always
+    image: mysql:5.7
+    container_name: mysql57
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./conf.d:/etc/mysql/conf.d
+      - ./my.cnf:/etc/mysql/my.cnf
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 3305:3306
