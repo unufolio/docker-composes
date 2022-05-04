@@ -1,0 +1,27 @@
+version: '3'
+services:
+  pulsar:
+    image: apachepulsar/pulsar:2.10.0
+    command: bin/pulsar standalone
+    restart: always
+    container_name: pulsar
+    ports:
+      - 6650:6650
+      - 8080:8080
+    volumes:
+      - ./data:/pulsar/data:rw
+      - ./conf:/pulsar/conf:rw
+    privileged: true
+  pulsar-manager:
+    image: "apachepulsar/pulsar-manager:v0.2.0"
+    container_name: pulsar_manager
+    restart: always
+    ports:
+      - "9527:9527"
+      - "7750:7750"
+    depends_on:
+      - pulsar
+    links:
+      - pulsar
+    environment:
+      - SPRING_CONFIGURATION_FILE=/pulsar-manager/pulsar-manager/application.properties

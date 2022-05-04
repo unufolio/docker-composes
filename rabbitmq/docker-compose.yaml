@@ -4,8 +4,8 @@ services:
     image: rabbitmq:3.9-management
     container_name: rabbitmq
     environment:
-      - RABBITMQ_DEFAULT_USER=root
-      - RABBITMQ_DEFAULT_PASS=root
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
     # restart: always
     # command: rabbitmq-plugins enable rabbitmq_management 
     ports:
@@ -16,9 +16,10 @@ services:
       - "25672:25672"
       - "5672:5672"
     volumes:
-      - ./lib/:/var/lib/rabbitmq/
-      - ./etc/:/etc/rabbitmq/"
-      - ./log/:/var/log/rabbitmq/log/
+      - ./data:/var/lib/rabbitmq
+      - ./etc:/etc/rabbitmq
+      - ./log:/var/log/rabbitmq/log
+      - ./plugins:/plugins
     logging:
       driver: "json-file"
       options:
